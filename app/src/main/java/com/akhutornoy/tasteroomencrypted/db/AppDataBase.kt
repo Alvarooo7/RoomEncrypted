@@ -26,7 +26,6 @@ abstract class AppDataBase : RoomDatabase() {
             Room.databaseBuilder(context.applicationContext,
                 AppDataBase::class.java, DB_NAME)
                 .openHelperFactory(SafeHelperFactory.fromUser(encryptionKey))
-                .allowMainThreadQueries()
                 .build()
     }
 }

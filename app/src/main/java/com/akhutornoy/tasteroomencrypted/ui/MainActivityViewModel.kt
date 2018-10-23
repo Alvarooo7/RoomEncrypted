@@ -2,12 +2,15 @@ package com.akhutornoy.tasteroomencrypted.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.akhutornoy.tasteroomencrypted.db.User
 import com.akhutornoy.tasteroomencrypted.db.UserDao
+import com.akhutornoy.tasteroomencrypted.ui.base.BaseViewModel
 import com.akhutornoy.tasteroomencrypted.ui.base.SingleLiveEvent
+import com.akhutornoy.tasteroomencrypted.utils.applyProgressBar
+import com.akhutornoy.tasteroomencrypted.utils.applySchedulers
+import io.reactivex.Single
 
-class MainActivityViewModel(private val userDao: UserDao) : ViewModel(){
+class MainActivityViewModel(private val userDao: UserDao) : BaseViewModel() {
 
     private val _onUserReadLiveData: MutableLiveData<User> by lazy { MutableLiveData<User>() }
     val onUserReadLiveData: LiveData<User>
@@ -18,12 +21,26 @@ class MainActivityViewModel(private val userDao: UserDao) : ViewModel(){
         get() = _onUserInserted
 
     fun insertUser(user: User) {
-        userDao.insertUser(user)
-        _onUserInserted.call()
+        autoUnsubscribe(
+            Single.fromCallable { userDao.insertUser(user) }
+                .applySchedulers()
+                .applyProgressBar(this)
+                .subscribe(
+                    { _onUserInserted.call() },
+                    this::showError
+                )
+        )
     }
 
     fun readUser() {
-        val user = userDao.getUser()
-        _onUserReadLiveData.value = user ?: User()
+        autoUnsubscribe(
+            Single.fromCallable { userDao.getUser() ?: User() }
+                .applySchedulers()
+                .applyProgressBar(this)
+                .subscribe(
+                    { user -> _onUserReadLiveData.value = user },
+                    this::showError
+                )
+        )
     }
 }
