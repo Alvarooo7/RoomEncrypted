@@ -35,6 +35,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    implementation "com.commonsware.cwac:saferoom.x:0.5.0"
 
     //Tibmer
     implementation "com.github.ajalt:timberkt:$timber_version"
