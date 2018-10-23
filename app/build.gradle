@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -23,11 +22,27 @@ android {
 }
 
 dependencies {
+    def room_version = '2.1.0-alpha01'
+    def timber_version = '1.5.1'
+    def leakcanary_android_version = '1.6.1'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
+    implementation "com.google.android.material:material:1.0.0"
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //Tibmer
+    implementation "com.github.ajalt:timberkt:$timber_version"
+    //LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_android_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_android_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary_android_version"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
