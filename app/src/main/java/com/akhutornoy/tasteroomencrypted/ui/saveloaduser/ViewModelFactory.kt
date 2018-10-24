@@ -1,4 +1,4 @@
-package com.akhutornoy.tasteroomencrypted.ui
+package com.akhutornoy.tasteroomencrypted.ui.saveloaduser
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,8 +9,8 @@ class ViewModelFactory(private val dataBase: AppDataBase) : ViewModelProvider.Fa
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(MainActivityViewModel::class.java) ->
-                MainActivityViewModel(dataBase.getUserDao())
+            modelClass.isAssignableFrom(SaveLoadUserActivityViewModel::class.java) ->
+                SaveLoadUserActivityViewModel(dataBase.getUserDao())
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         } as T
     }

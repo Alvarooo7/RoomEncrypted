@@ -1,4 +1,4 @@
-package com.akhutornoy.tasteroomencrypted.ui
+package com.akhutornoy.tasteroomencrypted.ui.saveloaduser
 
 import android.os.Bundle
 import android.widget.Toast
@@ -10,16 +10,16 @@ import com.akhutornoy.tasteroomencrypted.R
 import com.akhutornoy.tasteroomencrypted.db.User
 import com.github.ajalt.timberkt.Timber
 
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_save_load_user.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity() {
+class SaveLoadUserActivity : AppCompatActivity() {
 
-    private val viewModel: MainActivityViewModel by lazy { Injections.provideMainActivityViewModel(this) }
+    private val viewModel: SaveLoadUserActivityViewModel by lazy { Injections.provideMainActivityViewModel(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_save_load_user)
         setSupportActionBar(toolbar)
 
         initViewModelObservers()

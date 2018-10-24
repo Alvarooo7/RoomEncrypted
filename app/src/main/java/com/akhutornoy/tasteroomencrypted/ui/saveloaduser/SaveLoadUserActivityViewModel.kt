@@ -1,4 +1,4 @@
-package com.akhutornoy.tasteroomencrypted.ui
+package com.akhutornoy.tasteroomencrypted.ui.saveloaduser
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import com.akhutornoy.tasteroomencrypted.utils.applyProgressBar
 import com.akhutornoy.tasteroomencrypted.utils.applySchedulers
 import io.reactivex.Single
 
-class MainActivityViewModel(private val userDao: UserDao) : BaseViewModel() {
+class SaveLoadUserActivityViewModel(private val userDao: UserDao) : BaseViewModel() {
 
     private val _onUserReadLiveData: MutableLiveData<User> by lazy { MutableLiveData<User>() }
     val onUserReadLiveData: LiveData<User>
