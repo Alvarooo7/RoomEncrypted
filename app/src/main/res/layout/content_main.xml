@@ -87,13 +87,14 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/read_button"
             app:layout_constraintHorizontal_bias="0.5"/>
     <TextView
-            android:text="Email"
+            android:id="@+id/email_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/email_text_view"
+            android:layout_margin="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="Email"
             app:layout_constraintStart_toEndOf="@+id/name_text_view"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/name_text_view"
             app:layout_constraintBottom_toBottomOf="@+id/name_text_view"/>
 

@@ -1,10 +1,12 @@
 package com.akhutornoy.tasteroomencrypted.ui.saveloaduser
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer
+import com.akhutornoy.tastekeystore.utils.ui.hideKeyboard
 import com.akhutornoy.tasteroomencrypted.Injections
 import com.akhutornoy.tasteroomencrypted.R
 import com.akhutornoy.tasteroomencrypted.db.User
@@ -32,14 +34,16 @@ class SaveLoadUserActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        save_button.setOnClickListener { onInsertClicked() }
+        save_button.setOnClickListener (this::onInsertClicked)
         read_button.setOnClickListener { onReadClicked() }
     }
 
-    private fun onInsertClicked() {
+    private fun onInsertClicked(v: View) {
+        v.hideKeyboard()
+
         val name = name_et.text.toString()
         val email = email_et.text.toString()
-        val user = User(name, email)
+        val user = User(name = name, email = email)
         viewModel.insertUser(user)
     }
 

@@ -8,7 +8,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.commonsware.cwac.saferoom.SafeHelperFactory
 
-@Database(entities = [(User::class)], version = 2)
+@Database(entities = [(User::class)], version = 1)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun getUserDao(): UserDao
 
@@ -25,6 +25,7 @@ abstract class AppDataBase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
                 AppDataBase::class.java, DB_NAME)
+                .fallbackToDestructiveMigration()
                 .openHelperFactory(SafeHelperFactory.fromUser(encryptionKey))
                 .build()
     }
